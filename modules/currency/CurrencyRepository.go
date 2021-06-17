@@ -8,6 +8,7 @@ import (
 
 type CurrencyRepo struct {
 	CurrencyMapRates map[string]float64
+	CurrencyMapLongSymbol map[string]string
 }
 
 func (repo * CurrencyRepo) GetRate(src string) (float64, error) {
@@ -15,6 +16,15 @@ func (repo * CurrencyRepo) GetRate(src string) (float64, error) {
 
 	if !ok {
 		return 0.0, errors.New("Unknown currency symbol")
+	}
+	return result, nil
+}
+
+func (repo * CurrencyRepo) GetLongSymbol(src string) (string, error) {
+	result, ok := repo.CurrencyMapLongSymbol[src]
+
+	if !ok {
+		return "", errors.New("Unknown currency symbol")
 	}
 	return result, nil
 }
@@ -39,6 +49,7 @@ func (repo * CurrencyRepo) GetAllCurrencySymbol() ([]string) {
 
 func (repo * CurrencyRepo) InitRepo() {
 	repo.CurrencyMapRates = make(map[string]float64)
+	repo.CurrencyMapLongSymbol = make(map[string]string)
 
 	byteValue, _ := ioutil.ReadFile("data/currency.json")
 
@@ -47,5 +58,6 @@ func (repo * CurrencyRepo) InitRepo() {
 
 	for _, rate := range allRates {
 		repo.CurrencyMapRates[rate.Symbol] = rate.Rate
+		repo.CurrencyMapLongSymbol[rate.Symbol] = rate.LongSymbol
 	}
 }

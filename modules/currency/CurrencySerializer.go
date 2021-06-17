@@ -11,5 +11,10 @@ type Query struct {
 
 type ConvertResponse struct {
 	Query Query `json:"query"`
-	Result float64 `json:"result"`
+	Result ConversionResult `json:"result"`
+}
+
+type MultipleConvertRespons struct {
+	Query Query `json:"query"`
+	Results []ConversionResult `json:"results"`
 }

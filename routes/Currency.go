@@ -2,8 +2,8 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/jasonstanleyyoman/currency_be/middleware"
-	currency_converter "github.com/jasonstanleyyoman/currency_be/modules/currency"
+	"github.com/jasonstanleyyoman/currency_converter_be/middleware"
+	currency_converter "github.com/jasonstanleyyoman/currency_converter_be/modules/currency"
 )
 
 func InitCurrencyRoute(g *gin.RouterGroup) {

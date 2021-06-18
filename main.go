@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jasonstanleyyoman/currency_be/middleware"
-	"github.com/jasonstanleyyoman/currency_be/routes"
+	"github.com/jasonstanleyyoman/currency_converter_be/middleware"
+	"github.com/jasonstanleyyoman/currency_converter_be/routes"
 	"github.com/joho/godotenv"
 )
 

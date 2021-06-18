@@ -1,4 +1,4 @@
-module github.com/jasonstanleyyoman/currency_be
+module github.com/jasonstanleyyoman/currency_converter_be
 
 go 1.15
 

@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jasonstanleyyoman/currency_be/utils"
+	"github.com/jasonstanleyyoman/currency_converter_be/utils"
 )
 
 func SimpleAuth() gin.HandlerFunc {

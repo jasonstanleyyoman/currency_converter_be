@@ -11,9 +11,9 @@ docker pull docker.pkg.github.com/jasonstanleyyoman/currency_converter_be/curren
 
 - Run the image with SIMPLE_AUTH_TOKEN set as Environment Variable
 ```docker 
-docker run --name image-name -e SIMPLE_AUTH_TOKEN=YOUR_TOKEN -d docker.pkg.github.com/jasonstanleyyoman/currency_converter_be/currency_api:latest
+docker run --name image-name -e SIMPLE_AUTH_TOKEN=YOUR_TOKEN -p 3000:8080 -d docker.pkg.github.com/jasonstanleyyoman/currency_converter_be/currency_api:latest
 ```
-Change YOUR_TOKEN to your token choice
+Change YOUR_TOKEN to your token choice. You can access the API at port 3000 on your machine
 
 ## Endpoint
 

@@ -9,8 +9,6 @@ import (
 	"github.com/jasonstanleyyoman/currency_be/utils"
 )
 
-
-
 func SimpleAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authToken := os.Getenv("SIMPLE_AUTH_TOKEN")

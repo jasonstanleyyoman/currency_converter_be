@@ -6,17 +6,17 @@ import (
 )
 
 type ResponseBase struct {
-	Code int `json:"status"`
-	Timestamp int `json:"timestamp"`
-	Data interface{} `json:"data"`
+	Code      int         `json:"status"`
+	Timestamp int         `json:"timestamp"`
+	Data      interface{} `json:"data"`
 }
 
 func GenerateTimestampedResponse(code int, data interface{}) ResponseBase {
 	now := time.Now()
 	return ResponseBase{
-		Code: code,
+		Code:      code,
 		Timestamp: int(now.Unix()),
-		Data: data,
+		Data:      data,
 	}
 }
 

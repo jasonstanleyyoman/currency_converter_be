@@ -9,7 +9,7 @@ type CurrencyService struct {
 	Repo ICurrencyRepo
 }
 
-func (service * CurrencyService) Convert(amount float64, srcCurrencySymbol, destCurrencySymbol string) (ConversionResult ,error) {
+func (service *CurrencyService) Convert(amount float64, srcCurrencySymbol, destCurrencySymbol string) (ConversionResult, error) {
 	srcBase, errSrc := service.Repo.GetRate(srcCurrencySymbol)
 	destBase, errDst := service.Repo.GetRate(destCurrencySymbol)
 
@@ -25,21 +25,21 @@ func (service * CurrencyService) Convert(amount float64, srcCurrencySymbol, dest
 	dstLong, _ := service.Repo.GetLongSymbol(destCurrencySymbol)
 
 	return ConversionResult{
-		From: srcCurrencySymbol,
+		From:           srcCurrencySymbol,
 		FromLongSymbol: srcLong,
-		To: destCurrencySymbol,
-		ToLongSymbol: dstLong,
-		Amount: amount,
-		Result: (destBase / srcBase) * amount,
+		To:             destCurrencySymbol,
+		ToLongSymbol:   dstLong,
+		Amount:         amount,
+		Result:         (destBase / srcBase) * amount,
 	}, nil
 }
 
-func (service * CurrencyService) UpdateRate(currencySymbol string, newBase float64) (error) {
+func (service *CurrencyService) UpdateRate(currencySymbol string, newBase float64) error {
 	return service.Repo.UpdateRate(currencySymbol, newBase)
 }
 
-func (service * CurrencyService) ConvertMultiple(amount float64, 
-srcCurrencySymbol string, destCurrencySymbols []string) ([]ConversionResult, error) {
+func (service *CurrencyService) ConvertMultiple(amount float64,
+	srcCurrencySymbol string, destCurrencySymbols []string) ([]ConversionResult, error) {
 	results := make([]ConversionResult, 0)
 	for _, destCurrencySymbol := range destCurrencySymbols {
 		result, err := service.Convert(amount, srcCurrencySymbol, destCurrencySymbol)
@@ -53,7 +53,7 @@ srcCurrencySymbol string, destCurrencySymbols []string) ([]ConversionResult, err
 	return results, nil
 }
 
-func (service * CurrencyService) GetAllRates(symbol string) ([]Rate, error) {
+func (service *CurrencyService) GetAllRates(symbol string) ([]Rate, error) {
 
 	allCurrencySymbol := service.Repo.GetAllCurrencySymbol()
 	rateBase, err := service.Repo.GetRate(symbol)
@@ -68,8 +68,8 @@ func (service * CurrencyService) GetAllRates(symbol string) ([]Rate, error) {
 		rate, _ := service.Repo.GetRate(symbol)
 		longSymbol, _ := service.Repo.GetLongSymbol(symbol)
 		result = append(result, Rate{
-			Symbol: symbol,
-			Rate: rate * eurBase / (rateBase),
+			Symbol:     symbol,
+			Rate:       rate * eurBase / (rateBase),
 			LongSymbol: longSymbol,
 		})
 	}

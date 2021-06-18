@@ -13,18 +13,18 @@ type GinGonicCurrencyController struct {
 	Service ICurrencyService
 }
 
-func (controller * GinGonicCurrencyController) GetAllRates(ctx * gin.Context) {
+func (controller *GinGonicCurrencyController) GetAllRates(ctx *gin.Context) {
 	symbol := ctx.DefaultQuery("symbol", "EUR")
-	results, err :=controller.Service.GetAllRates(symbol)
+	results, err := controller.Service.GetAllRates(symbol)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, utils.GenerateErrorWithMessage(err.Error()))
 		return
 	}
 	ctx.JSON(http.StatusOK, utils.GenerateOkResponse(
-		GetAllRatesResponse{Rates: results,}))
+		GetAllRatesResponse{Rates: results}))
 }
 
-func (controller * GinGonicCurrencyController) Convert(ctx * gin.Context) {
+func (controller *GinGonicCurrencyController) Convert(ctx *gin.Context) {
 	sourceCurrency := ctx.Query("from")
 	destCurrency := ctx.Query("to")
 	amountInString := ctx.Query("amount")
@@ -44,7 +44,7 @@ func (controller * GinGonicCurrencyController) Convert(ctx * gin.Context) {
 		ctx.JSON(http.StatusBadRequest, utils.GenerateErrorWithMessage("Amount is not a number"))
 		return
 	}
-	
+
 	separatedDest := strings.Split(destCurrency, ",")
 
 	if len(separatedDest) > 1 {
@@ -54,13 +54,13 @@ func (controller * GinGonicCurrencyController) Convert(ctx * gin.Context) {
 			return
 		}
 		ctx.JSON(http.StatusOK, utils.GenerateOkResponse(
-			MultipleConvertRespons{
+			MultipleConvertResponse{
 				Query: Query{
-					From: sourceCurrency,
-					To: destCurrency,
+					From:   sourceCurrency,
+					To:     destCurrency,
 					Amount: amountInFloat,
 				},
-				Results: results,}))
+				Results: results}))
 	} else {
 		result, errConverting := controller.Service.Convert(amountInFloat, sourceCurrency, destCurrency)
 		if errConverting != nil {
@@ -70,15 +70,15 @@ func (controller * GinGonicCurrencyController) Convert(ctx * gin.Context) {
 		ctx.JSON(http.StatusOK, utils.GenerateOkResponse(
 			ConvertResponse{
 				Query: Query{
-					From: sourceCurrency,
-					To: destCurrency,
+					From:   sourceCurrency,
+					To:     destCurrency,
 					Amount: amountInFloat,
 				},
-				Result: result,}))
+				Result: result}))
 	}
 }
 
-func (controller * GinGonicCurrencyController) Update(ctx * gin.Context) {
+func (controller *GinGonicCurrencyController) Update(ctx *gin.Context) {
 	symbol := ctx.Query("symbol")
 	amountInString := ctx.Query("amount")
 

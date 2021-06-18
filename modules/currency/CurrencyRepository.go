@@ -7,11 +7,11 @@ import (
 )
 
 type CurrencyRepo struct {
-	CurrencyMapRates map[string]float64
+	CurrencyMapRates      map[string]float64
 	CurrencyMapLongSymbol map[string]string
 }
 
-func (repo * CurrencyRepo) GetRate(src string) (float64, error) {
+func (repo *CurrencyRepo) GetRate(src string) (float64, error) {
 	result, ok := repo.CurrencyMapRates[src]
 
 	if !ok {
@@ -20,7 +20,7 @@ func (repo * CurrencyRepo) GetRate(src string) (float64, error) {
 	return result, nil
 }
 
-func (repo * CurrencyRepo) GetLongSymbol(src string) (string, error) {
+func (repo *CurrencyRepo) GetLongSymbol(src string) (string, error) {
 	result, ok := repo.CurrencyMapLongSymbol[src]
 
 	if !ok {
@@ -29,17 +29,17 @@ func (repo * CurrencyRepo) GetLongSymbol(src string) (string, error) {
 	return result, nil
 }
 
-func (repo * CurrencyRepo) UpdateRate(currencySymbol string, newBase float64) (error) {
+func (repo *CurrencyRepo) UpdateRate(currencySymbol string, newBase float64) error {
 	if _, ok := repo.CurrencyMapRates[currencySymbol]; !ok {
 		return errors.New("Unknown currency symbol")
 	}
 
 	repo.CurrencyMapRates[currencySymbol] = newBase
 	return nil
-	
+
 }
 
-func (repo * CurrencyRepo) GetAllCurrencySymbol() ([]string) {
+func (repo *CurrencyRepo) GetAllCurrencySymbol() []string {
 	symbols := make([]string, 0)
 	for key := range repo.CurrencyMapRates {
 		symbols = append(symbols, key)
@@ -47,7 +47,7 @@ func (repo * CurrencyRepo) GetAllCurrencySymbol() ([]string) {
 	return symbols
 }
 
-func (repo * CurrencyRepo) InitRepo() {
+func (repo *CurrencyRepo) InitRepo() {
 	repo.CurrencyMapRates = make(map[string]float64)
 	repo.CurrencyMapLongSymbol = make(map[string]string)
 

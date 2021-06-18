@@ -26,7 +26,7 @@ Example response:
 ```json
 {
   "status": 200,
-  "timestamp:" 1624004704,
+  "timestamp": 1624004704,
   "data": {
     "rates": [
       {
